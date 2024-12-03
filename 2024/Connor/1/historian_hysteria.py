@@ -3,8 +3,8 @@ import time
 print("Part 1:")
 print("==============================")
 
-input_filepath = "./input.txt"
-example_filepath = "./example.txt"
+input_filepath = "./input_01.txt"
+example_filepath = "./example_01.txt"
 
 def read_and_sort_lists(filepath):
     with open(filepath) as f:
