@@ -1,5 +1,4 @@
 # %%
-import numpy as np
 from itertools import permutations
 from pathlib import Path
 
@@ -31,16 +30,17 @@ all_cities = list(distances.keys())
 all_possible_routes = [p for p in permutations(all_cities) if p < p[::-1]]
 
 # %%
-def get_route_length(distances, route):
-    distance = 0
-    for i, current_city in enumerate(route):
-        next_city = route[i+1]
-        distance += distances[current_city][next_city]
-        if i == len(route)-2:
-            return distance
+def get_route_length(city_distances: dict[str, dict[str, int]], route_cities: tuple[str, ...]) -> int:
+    total_distance = 0
+    for i, current_city in enumerate(route_cities):
+        next_city = route_cities[i + 1]
+        total_distance += city_distances[current_city][next_city]
+        if i == len(route_cities) - 2:
+            return total_distance
+    return total_distance
 
 # %%
-shortest_route = np.inf
+shortest_route = float("inf")
 for route in all_possible_routes:
     test_length = get_route_length(distances, route)
     if test_length < shortest_route:
